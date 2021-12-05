@@ -26,7 +26,7 @@ class _EditMenuState extends State<EditMenu> {
 
   Future updateMenu() async {
     final response = await http.put(
-        Uri.parse('http://192.168.42.12:8000/api/menus' +
+        Uri.parse('http://192.168.42.12:8000/api/menus/' +
             widget.menu['id'].toString()),
         body: {
           "name": _nameController.text,
@@ -35,8 +35,7 @@ class _EditMenuState extends State<EditMenu> {
           "image_url": _imageurlController.text,
         });
     print(response.body);
-
-    return json.decode(response.body);
+    return json.decode(response.body.toString().replaceAll("\n", ""));
   }
 
   @override
@@ -101,7 +100,7 @@ class _EditMenuState extends State<EditMenu> {
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
                         updateMenu().then((value) {
-                          Navigator.push(
+                          Navigator.pop(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => HomePage()));

@@ -28,7 +28,6 @@ class _AddMenuState extends State<AddMenu> {
       "harga": _hargaController.text,
       "image_url": _imageurlController.text,
     });
-
     return json.decode(response.body);
   }
 
@@ -96,6 +95,7 @@ class _AddMenuState extends State<AddMenu> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => HomePage()));
+
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text("Tambah Data Sukses"),
                           ));

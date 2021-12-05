@@ -7,9 +7,9 @@ import 'package:kedai_app/screens/edit_menu.dart';
 import 'package:kedai_app/screens/menu_detail.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({
-    Key key,
-  }) : super(key: key);
+  final String username;
+
+  const HomePage({this.username});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,11 +25,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future deleteMenu(String menuId) async {
-    final String url =
-        'http://192.168.42.12:8000/api/menus' + menuId.toString();
+    final String url = 'http://192.168.42.12:8000/api/menus/' + menuId;
 
     var response = await http.delete(Uri.parse(url));
-    return json.decode(response.body);
+    json.decode(response.body.toString());
   }
 
   @override
@@ -38,15 +37,18 @@ class _HomePageState extends State<HomePage> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AddMenu()));
+                    context, MaterialPageRoute(builder: (context) => AddMenu()))
+                .then((value) {
+              setState(() {});
+            });
           },
           child: Icon(
             Icons.add,
           ),
         ),
         appBar: AppBar(
-          title: Text('Kedai Makanan'),
-          backgroundColor: Colors.amberAccent[400],
+          title: Text('Admin Kedai Makanan'),
+          backgroundColor: Colors.orange[900],
         ),
         body: FutureBuilder(
           future: getMenus(),
@@ -56,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                   itemCount: snapshot.data['data'].length,
                   itemBuilder: (context, index) {
                     return Container(
-                      color: Colors.amberAccent,
+                      color: Colors.orange[700],
                       height: 180,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -124,7 +126,10 @@ class _HomePageState extends State<HomePage> {
                                                                               .data['data']
                                                                           [
                                                                           index],
-                                                                    )));
+                                                                    ))).then(
+                                                        (value) {
+                                                      setState(() {});
+                                                    });
                                                   },
                                                   child: Icon(Icons.edit)),
                                               Padding(
