@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//menu
 class MenuDetail extends StatelessWidget {
   final Map menu;
 
@@ -18,24 +19,6 @@ class MenuDetail extends StatelessWidget {
           ),
           SizedBox(
             height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  menu['harga'],
-                  style: TextStyle(fontSize: 20),
-                ),
-                Row(
-                  children: [
-                    Icon(Icons.edit),
-                    Icon(Icons.delete),
-                  ],
-                )
-              ],
-            ),
           ),
           Text(menu['description']),
         ],
