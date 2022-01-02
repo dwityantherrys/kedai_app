@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+//login
 
-// import http.dart plugin that was previously entered into pubspec.yaml
 import 'package:http/http.dart' as http;
 import 'package:kedai_app/screens/homepage.dart';
 import 'package:kedai_app/screens/user.dart';
@@ -40,11 +40,9 @@ class _LoginState extends State<Login> {
   TextEditingController usernameInput = new TextEditingController();
   TextEditingController passwordInput = new TextEditingController();
 
-  // method for login process
+  // method untuk login process
   void loginProcess() async {
     if (_formKey.currentState.validate()) {
-      // 10.0.2.2 is ip address from android studio's emulator
-
       final response = await http
           .post(Uri.parse('http://192.168.42.12:8000/api/login'), body: {
         "username": usernameInput.text,
@@ -60,10 +58,7 @@ class _LoginState extends State<Login> {
         });
       } else {
         setState(() {});
-
-        // move the page according to user status
         if (status == "admin") {
-          // use navigator push replacement so that user can not go back to login page
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -205,12 +200,6 @@ class _LoginState extends State<Login> {
                         SizedBox(
                           height: 40,
                         ),
-                        FadeAnimation(
-                            1.5,
-                            Text(
-                              "Forgot Password?",
-                              style: TextStyle(color: Colors.grey),
-                            )),
                         SizedBox(
                           height: 40,
                         ),
@@ -223,9 +212,7 @@ class _LoginState extends State<Login> {
                                   borderRadius: BorderRadius.circular(50),
                                   color: Colors.orange[900]),
                               child: InkWell(
-                                onTap: () {
-                                  loginProcess();
-                                },
+                                onTap: () {},
                                 child: Center(
                                   child: Text("Login",
                                       style: TextStyle(
@@ -236,6 +223,7 @@ class _LoginState extends State<Login> {
                             )),
                         SizedBox(
                           height: 50,
+                          //height
                         ),
                       ],
                     ),
